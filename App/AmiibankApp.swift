@@ -30,14 +30,16 @@ struct AmiibankApp: App {
 
 struct RootView: View {
     @Environment(Actions.self) private var actions
+    /// Opening tab; `-startTab n2` on launch picks another, which is how store screenshots are taken.
+    @State private var tab = UserDefaults.standard.string(forKey: "startTab") ?? "collection"
 
     var body: some View {
         @Bindable var actions = actions
-        TabView {
-            Tab("Collection", systemImage: "house") { CollectionView() }
-            Tab("N2", systemImage: "dot.radiowaves.left.and.right") { N2View() }
-            Tab("Games", systemImage: "gamecontroller") { GamesView() }
-            Tab("Settings", systemImage: "gearshape") { SettingsView() }
+        TabView(selection: $tab) {
+            Tab("Collection", systemImage: "house", value: "collection") { CollectionView() }
+            Tab("N2", systemImage: "dot.radiowaves.left.and.right", value: "n2") { N2View() }
+            Tab("Games", systemImage: "gamecontroller", value: "games") { GamesView() }
+            Tab("Settings", systemImage: "gearshape", value: "settings") { SettingsView() }
         }
         .alert(actions.message ?? "", isPresented: Binding { actions.message != nil } set: { if !$0 { actions.message = nil } }) {}
     }
