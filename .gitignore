@@ -1,0 +1,11 @@
+# Nintendo key material and amiibo dumps never go in this repo.
+*.bin
+*.nfc
+Signing.xcconfig
+*.xcodeproj
+.build/
+.swiftpm/
+DerivedData/
+xcuserdata/
+.DS_Store
+build/

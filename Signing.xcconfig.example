@@ -1,0 +1,3 @@
+// Copy to Signing.xcconfig (gitignored) and fill in.
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+AMIIBANK_BUNDLE_ID = com.example.amiibank

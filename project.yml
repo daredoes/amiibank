@@ -1,0 +1,42 @@
+name: Amiibank
+options:
+  bundleIdPrefix: work.daredoes
+  deploymentTarget:
+    iOS: "18.0"
+configFiles:
+  Debug: Signing.xcconfig
+  Release: Signing.xcconfig
+packages:
+  AmiiboKit:
+    path: Packages/AmiiboKit
+targets:
+  Amiibank:
+    type: application
+    platform: iOS
+    sources: [App]
+    dependencies:
+      - package: AmiiboKit
+    entitlements:
+      path: App/Amiibank.entitlements
+      properties:
+        com.apple.developer.nfc.readersession.formats: [TAG]
+        com.apple.developer.game-center: true
+        com.apple.developer.icloud-container-identifiers: [iCloud.$(AMIIBANK_BUNDLE_ID)]
+        com.apple.developer.icloud-services: [CloudDocuments]
+        com.apple.developer.ubiquity-container-identifiers: [iCloud.$(AMIIBANK_BUNDLE_ID)]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Amiibank
+        UILaunchScreen: {}
+        NFCReaderUsageDescription: Amiibank reads and writes amiibo tags and N2 Elite emulators.
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(AMIIBANK_BUNDLE_ID)
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: false
