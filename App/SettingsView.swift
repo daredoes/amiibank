@@ -55,7 +55,7 @@ private struct PreferencesView: View {
                 Text("Game Center")
             } footer: {
                 switch gameCenter.state {
-                case .failed(let why): Text(why)
+                case .failed: Text("Game Center isn't signed in on this iPhone. Sign in under Settings › Game Center, then come back to back up your collection.")
                 default:
                     Text(gameCenter.lastSave.map { "Last saved \($0.formatted(.relative(presentation: .named)))." } ?? "Saves your collection, write counters and favorites to your Game Center account. Restore adds missing amiibo; it never deletes. Your key file is not included.")
                 }
